@@ -12,7 +12,8 @@ async function main() {
      * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
      */
 
-	const uri = "mongodb://127.0.0.1:27017/eventsList";
+	const uri =
+    'mongodb+srv://dar:lilikoi@cluster0-zf9fp.gcp.mongodb.net/test?retryWrites=true&w=majority';
 	const client = new MongoClient(uri, {
 		useUnifiedTopology: true,
 		useNewUrlParser: true,
@@ -38,24 +39,24 @@ async function init(client) {
 	const db = client.db('eventList')
 	const events = db.collection('events')
 
-	app.get('/init', function (req, res) {
-		events.insertOne({
-			text: "Some Helpful event",
-			start_date: new Date(2018, 8, 1),
-			end_date: new Date(2018, 8, 5)
-		})
-		events.insertOne({
-			text: "Another Cool Event",
-			start_date: new Date(2018, 8, 11),
-			end_date: new Date(2018, 8, 11)
-		})
-		events.insertOne({
-			text: "Super Activity",
-			start_date: new Date(2018, 8, 9),
-			end_date: new Date(2018, 8, 10)
-		})
-		res.send("Test events were added to the database")
-	});
+	// app.get('/init', function (req, res) {
+	// 	events.insertOne({
+	// 		text: "Some Helpful event",
+	// 		start_date: new Date(2018, 8, 1),
+	// 		end_date: new Date(2018, 8, 5)
+	// 	})
+	// 	events.insertOne({
+	// 		text: "Another Cool Event",
+	// 		start_date: new Date(2018, 8, 11),
+	// 		end_date: new Date(2018, 8, 11)
+	// 	})
+	// 	events.insertOne({
+	// 		text: "Super Activity",
+	// 		start_date: new Date(2018, 8, 9),
+	// 		end_date: new Date(2018, 8, 10)
+	// 	})
+	// 	res.send("Test events were added to the database")
+	// });
 
 	app.get('/data', function (req, res) {
 		events.find().toArray(function (err, data) {
